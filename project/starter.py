@@ -1,8 +1,8 @@
 from flask import Flask
 
-from app import auth, main
-from tools import database, safeguard
-from settings import BaseConfig, DevelopmentConfig
+from project.app import auth, main
+from project.tools import database, safeguard
+from project.settings import BaseConfig, choose_config
 
 
 def create_minimal_app(setting: BaseConfig) -> Flask:
@@ -12,8 +12,8 @@ def create_minimal_app(setting: BaseConfig) -> Flask:
     return app
 
 
-def create_app() -> Flask:
-    app = create_minimal_app(DevelopmentConfig)
+def create_app(env: str = "development") -> Flask:
+    app = create_minimal_app(choose_config(env))
 
     # Initialize infrastructure
     database.init_app(app)

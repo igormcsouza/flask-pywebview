@@ -2,7 +2,7 @@ from flask_login import login_user, login_required, logout_user
 from flask import Flask, Blueprint, redirect, url_for, request, flash, render_template, session
 from werkzeug.security import check_password_hash
 
-from tools.database.models import User
+from project.tools.database.models import User
 
 
 bp = Blueprint("auth", __name__, url_prefix='/auth')
@@ -23,8 +23,8 @@ def login():
             return redirect(url_for("auth.login"))
 
         if not login_user(user, remember=remember):
-            flash("Attempt to login failed for some reason!", "error")
-            return redirect(url_for("auth.login"))
+            flash("Attempt to login failed for some reason!", "error") # pragma: no cover
+            return redirect(url_for("auth.login")) # pragma: no cover
 
         session.permanent = True
         return redirect(request.args.get('next') or url_for("main.main"))
