@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1>Login</h1>
+      <form action="/auth/login" method="post">
+        <div class="form-group">
+          <label for="inputEmail">Email address</label>
+          <input type="email" class="form-control" id="inputEmail" name="email" aria-describedby="emailHelp">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword">Password</label>
+          <input type="password" class="form-control" name="password" id="inputPassword">
+        </div>
+        <div class="form-group mt-2">
+          <input aria-label="Remember Me?" type="checkbox" class="form-check-input" name="remember" id="inputRemeberMe">
+          <label for="inputRemeberMe">Remeber Me?</label>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
