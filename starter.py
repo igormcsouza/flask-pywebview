@@ -1,4 +1,4 @@
-from flask import Flask, redirect
+from flask import Flask
 
 from app import auth, main
 from tools import database, safeguard

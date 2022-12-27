@@ -1,6 +1,6 @@
 from flask_login import login_user, login_required, logout_user
 from flask import Flask, Blueprint, redirect, url_for, request, flash, render_template, session
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash
 
 from tools.database.models import User
 
@@ -24,14 +24,15 @@ def login():
 
         if not login_user(user, remember=remember):
             flash("Attempt to login failed for some reason!", "error")
+            return redirect(url_for("auth.login"))
 
         session.permanent = True
         return redirect(request.args.get('next') or url_for("main.main"))
-    else:
-        return render_template('auth/index.html')
+
+    return render_template('auth/index.html')
 
 
-@bp.route('/logout')
+@bp.route('/logout', methods=["GET"])
 @login_required
 def logout():
     logout_user()
