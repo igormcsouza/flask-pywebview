@@ -1,0 +1,23 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+        exclude: ^.*\b(charts)\b.*$
+      - id: check-added-large-files
+      - id: detect-private-key
+      - id: check-docstring-first
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+        args: ["--line-length", "80"]
+        exclude: ^.*\b(migrations)\b.*$
+        types: [file, python]
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.2.1
+    hooks:
+      - id: prettier
+        exclude: ^.*\b(charts)\b.*$
